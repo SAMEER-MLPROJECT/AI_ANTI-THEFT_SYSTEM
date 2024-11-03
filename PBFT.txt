@@ -1,0 +1,65 @@
+import hashlib
+import time
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
+from random import choice, randint
+
+key = b"1234567890ABCDEF"
+blockchain = []
+nodes = ["Node_A", "Node_B", "Node_C", "Node_D"]
+faulty_nodes = 1
+
+def decrypt_data(encrypted_data_hex):
+    encrypted_data = bytes.fromhex(encrypted_data_hex)
+    cipher = AES.new(key, AES.MODE_ECB)
+    decrypted_data = unpad(cipher.decrypt(encrypted_data), 16)
+    return float(decrypted_data.decode('utf-8'))
+
+def create_block(data, previous_hash):
+    block = {
+        'index': len(blockchain) + 1,
+        'timestamp': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
+        'data': data,
+        'previous_hash': previous_hash,
+        'hash': hashlib.sha256(str(data).encode()).hexdigest()
+    }
+    return block
+
+def pbft_prepare_phase(block):
+    prepare_votes = {node: verify_block(block) for node in nodes}
+    return sum(prepare_votes.values()) >= (len(nodes) - faulty_nodes)
+
+def pbft_commit_phase(block):
+    commit_votes = {node: verify_block(block) for node in nodes}
+    return sum(commit_votes.values()) >= (len(nodes) - faulty_nodes)
+
+def pbft_consensus(block):
+    if pbft_prepare_phase(block) and pbft_commit_phase(block):
+        return True
+    return False
+
+def verify_block(block):
+    expected_hash = hashlib.sha256(str(block['data']).encode()).hexdigest()
+    node_verification = expected_hash == block['hash']
+    return node_verification if randint(1, 10) > 2 else not node_verification
+
+def add_to_blockchain(data):
+    previous_hash = blockchain[-1]['hash'] if blockchain else '0'
+    new_block = create_block(data, previous_hash)
+    if pbft_consensus(new_block):
+        blockchain.append(new_block)
+        with open("blockchain_ledger.txt", "w") as ledger_file:
+            for block in blockchain:
+                ledger_file.write(str(block) + "\n")
+
+def simulate_data_reception():
+    encrypted_data_hex = "b2c3a1234b4c1234d5e6f67891234567"
+    try:
+        data = decrypt_data(encrypted_data_hex)
+        add_to_blockchain({"transaction": data})
+    except Exception as e:
+        print(f"Error: {e}")
+
+while True:
+    simulate_data_reception()
+    time.sleep(5)

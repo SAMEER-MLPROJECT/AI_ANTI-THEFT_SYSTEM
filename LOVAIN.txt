@@ -1,0 +1,70 @@
+import numpy as np
+import networkx as nx
+
+def calculate_modularity(G, partition):
+    """ Calculate the modularity of the given partition of the graph G. """
+    m = G.number_of_edges()
+    A = nx.to_numpy_array(G)
+    Q = 0.0
+    
+   
+    degrees = np.array([G.degree(n) for n in G.nodes()])
+    
+    for community in set(partition):
+        nodes_in_community = [n for n in range(len(partition)) if partition[n] == community]
+        subgraph = A[np.ix_(nodes_in_community, nodes_in_community)]
+        total_weight = np.sum(subgraph)
+        expected_weight = (np.sum(degrees[nodes_in_community]) ** 2) / (2 * m)
+        Q += total_weight - expected_weight
+        
+    return Q / (2 * m)
+
+def louvain_algorithm(G):
+    """ Apply the Louvain algorithm for community detection. """
+    # Initialize partition: each node is its own community
+    partition = list(range(len(G.nodes())))
+    Q = calculate_modularity(G, partition)
+    
+    while True:
+        # Step 1: Local optimization
+        improvement = False
+        for node in G.nodes():
+            best_community = partition[node]
+            best_gain = 0
+            
+            for neighbor in G.neighbors(node):
+                new_community = partition[neighbor]
+                if new_community != best_community:
+                    # Move node to neighbor's community and calculate gain
+                    partition[node] = new_community
+                    new_Q = calculate_modularity(G, partition)
+                    gain = new_Q - Q
+                    
+                    if gain > best_gain:
+                        best_gain = gain
+                        best_community = new_community
+            
+            if best_gain > THRESHOLD:
+                partition[node] = best_community
+                Q += best_gain
+                improvement = True
+        
+        
+        if not improvement:
+            break
+            
+    return partition
+
+# Example usage
+if __name__ == "__main__":
+    # Create a sample graph
+    G = nx.Graph()
+    edges = [(0, 1), (1, 2), (2, 0), (3, 4), (4, 5), (5, 3), (1, 3)]
+    G.add_edges_from(edges)
+
+    
+    communities = louvain_algorithm(G)
+
+    
+    print("Detected communities:", communities)
+    print("Modularity:", calculate_modularity(G, communities))

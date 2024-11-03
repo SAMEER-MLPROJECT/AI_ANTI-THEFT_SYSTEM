@@ -1,0 +1,36 @@
+#include <AESLib.h>
+#include <VirtualWire.h>
+
+const int sensorPin = A7;
+const int rfTxPin = A12;
+const char key[16] = "1234567890ABCDEF";
+
+AESLib aesLib;
+
+void setup() {
+    Serial.begin(9600);
+    vw_setup(2000);
+    vw_set_tx_pin(rfTxPin);
+    pinMode(sensorPin, INPUT);
+}
+
+String encryptData(float data) {
+    byte plainText[16];
+    byte cipherText[16];
+    dtostrf(data, 4, 2, (char*)plainText);
+    aesLib.encryptBlock(cipherText, plainText, key);
+    String encryptedString = "";
+    for (int i = 0; i < 16; i++) {
+        encryptedString += String(cipherText[i], HEX);
+    }
+    return encryptedString;
+}
+
+void loop() {
+    int sensorValue = analogRead(sensorPin);
+    float current = (sensorValue * (5.0 / 1023.0) - 2.5) / 0.185;
+    String encryptedData = encryptData(current);
+    vw_send((uint8_t *)encryptedData.c_str(), encryptedData.length());
+    vw_wait_tx();
+    delay(1000);
+}

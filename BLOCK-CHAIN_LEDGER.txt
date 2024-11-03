@@ -1,0 +1,49 @@
+import serial
+import time
+import hashlib
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
+
+key = b"1234567890ABCDEF"
+blockchain = []
+
+ser = serial.Serial('COM3', 9600)
+time.sleep(2)
+
+def decrypt_data(encrypted_data_hex):
+    encrypted_data = bytes.fromhex(encrypted_data_hex)
+    cipher = AES.new(key, AES.MODE_ECB)
+    decrypted_data = unpad(cipher.decrypt(encrypted_data), 16)
+    return decrypted_data.decode('utf-8')
+
+def create_block(data, previous_hash):
+    block = {
+        'index': len(blockchain) + 1,
+        'timestamp': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
+        'data': data,
+        'previous_hash': previous_hash,
+        'hash': ''
+    }
+    block['hash'] = hashlib.sha256(str(block).encode()).hexdigest()
+    return block
+
+def add_to_blockchain(data):
+    previous_hash = blockchain[-1]['hash'] if blockchain else '0'
+    new_block = create_block(data, previous_hash)
+    blockchain.append(new_block)
+    print(f"Block added: {new_block}")
+
+print("Monitoring for incoming data...")
+while True:
+    if ser.in_waiting > 0:
+        line = ser.readline().decode('utf-8').strip()
+        try:
+            decrypted_data = decrypt_data(line)
+            print(f"Received and decrypted data: {decrypted_data} A")
+            add_to_blockchain(decrypted_data)
+            with open("blockchain_ledger.txt", "w") as ledger_file:
+                for block in blockchain:
+                    ledger_file.write(str(block) + "\n")
+        except Exception as e:
+            print(f"Error: {e}")
+        time.sleep(1)

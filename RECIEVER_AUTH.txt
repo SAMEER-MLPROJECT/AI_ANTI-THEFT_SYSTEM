@@ -1,0 +1,31 @@
+#include <AESLib.h>
+#include <VirtualWire.h>
+
+const int rfRxPin = 11;
+const char key[16] = "1234567890ABCDEF";
+
+AESLib aesLib;
+
+void setup() {
+    Serial.begin(9600);
+    vw_setup(2000);
+    vw_set_rx_pin(rfRxPin);
+    vw_rx_start();
+}
+
+String decryptData(byte *cipherText) {
+    byte plainText[16];
+    aesLib.decryptBlock(plainText, cipherText, key);
+    return String((char*)plainText);
+}
+
+void loop() {
+    uint8_t buf[VW_MAX_MESSAGE_LEN];
+    uint8_t buflen = VW_MAX_MESSAGE_LEN;
+    if (vw_get_message(buf, &buflen)) {
+        String decryptedData = decryptData(buf);
+        Serial.print("Decrypted Data: ");
+        Serial.println(decryptedData);
+    }
+    delay(1000);
+}

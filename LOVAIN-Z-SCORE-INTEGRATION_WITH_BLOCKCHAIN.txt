@@ -1,0 +1,77 @@
+import serial
+import time
+import hashlib
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
+from sklearn.preprocessing import StandardScaler
+import networkx as nx
+import community as community_louvain
+import numpy as np
+
+key = b"1234567890ABCDEF"
+blockchain = []
+z_score_threshold = 2.0
+scaler = StandardScaler()
+G = nx.Graph()
+ser = serial.Serial('COM3', 9600)
+time.sleep(2)
+
+def decrypt_data(encrypted_data_hex):
+    encrypted_data = bytes.fromhex(encrypted_data_hex)
+    cipher = AES.new(key, AES.MODE_ECB)
+    decrypted_data = unpad(cipher.decrypt(encrypted_data), 16)
+    return float(decrypted_data.decode('utf-8'))
+
+def create_block(data, previous_hash):
+    block = {
+        'index': len(blockchain) + 1,
+        'timestamp': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
+        'data': data,
+        'previous_hash': previous_hash,
+        'hash': ''
+    }
+    block['hash'] = hashlib.sha256(str(block).encode()).hexdigest()
+    return block
+
+def add_to_blockchain(data):
+    previous_hash = blockchain[-1]['hash'] if blockchain else '0'
+    new_block = create_block(data, previous_hash)
+    blockchain.append(new_block)
+    with open("blockchain_ledger.txt", "w") as ledger_file:
+        for block in blockchain:
+            ledger_file.write(str(block) + "\n")
+
+def calculate_z_score(data, value):
+    scaled_data = scaler.fit_transform(np.array(data).reshape(-1, 1))
+    mean, std = scaled_data.mean(), scaled_data.std()
+    z_score = abs((value - mean) / std)
+    return z_score
+
+def louvain_community_detection():
+    partition = community_louvain.best_partition(G)
+    with open("louvain_community_log.txt", "w") as file:
+        for node, community in partition.items():
+            file.write(f"Node {node} is in community {community}\n")
+
+print("Monitoring for incoming data...")
+real_time_data = []
+while True:
+    if ser.in_waiting > 0:
+        line = ser.readline().decode('utf-8').strip()
+        try:
+            current_value = decrypt_data(line)
+            real_time_data.append(current_value)
+            if len(real_time_data) > 50:
+                real_time_data.pop(0)
+            z_score = calculate_z_score(real_time_data, current_value)
+            if z_score > z_score_threshold:
+                add_to_blockchain({"anomaly": current_value, "z_score": z_score})
+            else:
+                add_to_blockchain({"normal": current_value})
+            G.add_edge("Meter", f"Reading {len(real_time_data)}", weight=current_value)
+            if len(G.edges) >= 50:
+                louvain_community_detection()
+                G.clear()
+        except Exception as e:
+            print(f"Error: {e}")
+        time.sleep(1)

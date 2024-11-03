@@ -1,0 +1,66 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense  
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import accuracy_score, confusion_matrix, roc_curve, auc
+from sklearn.model_selection import train_test_split
+
+np.random.seed(42)
+normal_data = 10 + 0.5 * np.random.randn(1000)
+faulty_data = np.concatenate((20 + 0.5 * np.random.randn(50), 5 + 0.5 * np.random.randn(50)))
+data = np.concatenate((normal_data, faulty_data))
+labels = np.concatenate((np.zeros(1000), np.ones(100)))
+
+scaler = MinMaxScaler(feature_range=(0, 1))
+data_scaled = scaler.fit_transform(data.reshape(-1, 1))
+
+def create_sequences(data, labels, seq_length=50):
+    X, y = [], []
+    for i in range(seq_length, len(data)):
+        X.append(data[i-seq_length:i])
+        y.append(labels[i])
+    return np.array(X), np.array(y)
+
+X, y = create_sequences(data_scaled, labels)
+X = np.reshape(X, (X.shape[0], X.shape[1], 1))
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = Sequential()
+model.add(LSTM(64, return_sequences=True, input_shape=(X_train.shape[1], 1)))
+model.add(LSTM(32))
+model.add(Dense(1, activation='sigmoid'))
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+history = model.fit(X_train, y_train, epochs=10, batch_size=32, validation_split=0.2, verbose=1)
+
+y_pred = (model.predict(X_test) > 0.5).astype("int32")
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Model Accuracy: {accuracy * 100:.2f}%")
+
+conf_matrix = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:\n", conf_matrix)
+
+y_pred_prob = model.predict(X_test).ravel()
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
+roc_auc = auc(fpr, tpr)
+
+plt.figure(figsize=(10, 6))
+plt.plot(fpr, tpr, label=f'ROC Curve (AUC = {roc_auc:.2f})', color='blue')
+plt.plot([0, 1], [0, 1], color='red', linestyle='--')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic (ROC) Curve')
+plt.legend()
+plt.show()
+
+plt.figure(figsize=(6, 5))
+plt.matshow(conf_matrix, cmap=plt.cm.Blues, alpha=0.3)
+for i in range(conf_matrix.shape[0]):
+    for j in range(conf_matrix.shape[1]):
+        plt.text(x=j, y=i, s=conf_matrix[i, j], ha='center', va='center')
+plt.xlabel('Predicted label')
+plt.ylabel('True label')
+plt.title('Confusion Matrix')
+plt.show()
