@@ -2,7 +2,6 @@ import numpy as np
 import networkx as nx
 
 def calculate_modularity(G, partition):
-    """ Calculate the modularity of the given partition of the graph G. """
     m = G.number_of_edges()
     A = nx.to_numpy_array(G)
     Q = 0.0
@@ -20,13 +19,11 @@ def calculate_modularity(G, partition):
     return Q / (2 * m)
 
 def louvain_algorithm(G):
-    """ Apply the Louvain algorithm for community detection. """
-    # Initialize partition: each node is its own community
     partition = list(range(len(G.nodes())))
     Q = calculate_modularity(G, partition)
     
     while True:
-        # Step 1: Local optimization
+    
         improvement = False
         for node in G.nodes():
             best_community = partition[node]
@@ -35,7 +32,6 @@ def louvain_algorithm(G):
             for neighbor in G.neighbors(node):
                 new_community = partition[neighbor]
                 if new_community != best_community:
-                    # Move node to neighbor's community and calculate gain
                     partition[node] = new_community
                     new_Q = calculate_modularity(G, partition)
                     gain = new_Q - Q
@@ -55,9 +51,9 @@ def louvain_algorithm(G):
             
     return partition
 
-# Example usage
+
 if __name__ == "__main__":
-    # Create a sample graph
+    # SAMPLE GRAPH
     G = nx.Graph()
     edges = [(0, 1), (1, 2), (2, 0), (3, 4), (4, 5), (5, 3), (1, 3)]
     G.add_edges_from(edges)
