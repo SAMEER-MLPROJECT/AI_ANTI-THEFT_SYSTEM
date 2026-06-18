@@ -1,87 +1,78 @@
-# A Novel Blockchain-Based Energy Anti-Theft System
+# CryptEthEra
 
-### Advanced with Graph Theory & Machine Learning for Real-Time Anomaly Detection
+### Blockchain-Assisted Smart Grid Security & Energy Theft Detection Framework
 
-![Research](https://img.shields.io/badge/Research-Paper%20Completed-success)
-![Status](https://img.shields.io/badge/Status-MVP%20Validated-brightgreen)
-![Blockchain](https://img.shields.io/badge/Blockchain-PBFT-blue)
-![AI](https://img.shields.io/badge/AI-IsolationForest%20%7C%20LSTM-orange)
-![Hardware](https://img.shields.io/badge/Hardware-STM8%20%7C%20Arduino%20Nano-red)
+🏆 **Samsung Solve for Tomorrow India 2025 — Grand Finale (Top 20 Teams Nationwide)**
 
-> A decentralized, tamper-proof, and intelligent smart-grid security framework designed to combat electricity theft through Blockchain, Graph Theory, and Machine Learning.
+🏆 **Selected for IRIS (Initiative for Research and Innovation in STEM)**
+
+📄 **Independent Research Project integrating Cybersecurity, Blockchain, Graph Theory, Machine Learning, and IoT Systems for Smart Grid Protection**
 
 ---
 
-## 📖 Table of Contents
+## Overview
 
-* [Problem Statement](#-problem-statement)
-* [Key Innovations](#-key-innovations)
-* [System Architecture](#-system-architecture)
-* [Cryptographic & Analytical Data Flow](#-cryptographic--analytical-data-flow)
-* [Repository Structure](#-repository-structure)
-* [Mathematical Foundations](#-mathematical-foundations)
-* [Recognition & Validation](#-recognition--validation)
-* [Project Roadmap](#-project-roadmap)
-* [Future Scope](#-future-scope)
+CryptEthEra is a cybersecurity-oriented smart grid monitoring framework designed to detect electricity theft, meter tampering, fraudulent reporting, and infrastructure anomalies in power distribution networks.
+
+The framework combines:
+
+* Blockchain-based immutable logging
+* Machine Learning anomaly detection
+* Graph-theoretic network analysis
+* IoT-based telemetry collection
+* Cryptographic authentication mechanisms
+
+to create a transparent, tamper-resistant, and scalable monitoring architecture for modern electrical grids.
 
 ---
 
-## ⚡ Problem Statement
+## Problem Statement
 
 Electricity theft remains one of the largest contributors to power distribution losses worldwide.
 
-Common forms of theft include:
+Common forms of energy theft include:
 
-* Direct Line Tapping
-* Meter Tampering
-* Consumption Record Manipulation
-* Fraudulent Reporting
-* Corruption at Distribution Levels
+* Direct line tapping
+* Meter tampering
+* Consumption record manipulation
+* Fraudulent reporting
+* Insider corruption within distribution systems
 
-Conventional monitoring systems are largely centralized and vulnerable to manipulation, delayed detection, and lack of transparency.
+Traditional monitoring architectures are largely centralized and vulnerable to delayed detection, manipulation, and poor traceability.
 
-This project proposes a decentralized architecture capable of securing energy distribution while enabling real-time anomaly detection and predictive maintenance.
-
----
-
-## 💡 Key Innovations
-
-### 🔐 Blockchain Secured Smart Grid
-
-* Distributed ledger architecture
-* Tamper-resistant energy records
-* Decentralized verification
-* Transparent auditing
-
-### 🤖 AI-Powered Theft Detection
-
-* Isolation Forest anomaly detection
-* Self-adaptive monitoring
-* Real-time fraud detection
-
-### 📊 Graph Theory Optimization
-
-* Louvain Community Detection
-* Z-Score based anomaly localization
-* Localized theft identification
-
-### 🛡 Multi-Layer Security
-
-* AES encrypted communication
-* Unique Meter IDs
-* Digital signatures
-* Nonce & timestamp verification
-* Hardware tamper detection
-
-### 🌍 Rural & Urban Deployment Support
-
-* LoRaWAN
-* RF Communication
-* WiFi Integration
+CryptEthEra proposes a decentralized monitoring framework capable of providing secure data integrity, transparent auditing, and real-time anomaly detection.
 
 ---
 
-## 🏗️ System Architecture
+## Recognition & Validation
+
+### National Recognition
+
+🏆 Samsung Solve for Tomorrow India 2025 — Grand Finale (Top 20)
+
+🏆 Selected for IRIS National Fair
+
+### Research & Prototype Validation
+
+✅ Research Paper Completed
+
+✅ System Architecture Designed
+
+✅ Mathematical Framework Developed
+
+✅ Simulation Environment Implemented
+
+✅ Synthetic Dataset Validation Completed
+
+✅ Hardware MVP Demonstrated
+
+✅ Dashboard-Based Monitoring Demonstrated
+
+🔄 Real-World Field Validation Ongoing
+
+---
+
+## System Architecture
 
 The framework operates across three hierarchical layers to ensure scalability, security, and computational efficiency.
 
@@ -92,253 +83,256 @@ graph TD
     classDef ledgerNode fill:#bbf,stroke:#333,stroke-width:2px;
     classDef coreNode fill:#bfb,stroke:#333,stroke-width:2px;
 
-    subgraph L1 [Level 1: Household Edge Telemetry]
-        M1[Smart Meter 01]:::edgeNode -->|AES-128 + Nonce| S1
-        M2[Smart Meter 02]:::edgeNode -->|AES-128 + Nonce| S1
-        M3[Smart Meter 03]:::edgeNode -->|AES-128 + Nonce| S2
+    subgraph L1 [Level 1: Smart Meter Layer]
+        M1[Meter Node 1]:::edgeNode -->|Authenticated Telemetry| S1
+        M2[Meter Node 2]:::edgeNode -->|Authenticated Telemetry| S1
+        M3[Meter Node 3]:::edgeNode -->|Authenticated Telemetry| S2
     end
 
-    subgraph L2 [Level 2: Distributed Substation Ledger]
-        S1[Substation Node A]:::ledgerNode <-->|PBFT Consensus| S2[Substation Node B]:::ledgerNode
-        S1 -->|Louvain Community Detection| S1
+    subgraph L2 [Level 2: Substation Monitoring Layer]
+        S1[Substation Gateway]:::ledgerNode
+        S2[Substation Gateway]:::ledgerNode
+
+        S1 <-->|Ledger Synchronization| S2
+
+        S1 -->|Community Analysis| S1
     end
 
-    subgraph L3 [Level 3: Central Monitoring Station]
-        S1 -->|Immutable Block Relay| CC[Central Control Engine]:::coreNode
-        S2 -->|Immutable Block Relay| CC
+    subgraph L3 [Level 3: Central Monitoring Layer]
+        S1 --> CC[Central Monitoring Engine]:::coreNode
+        S2 --> CC
 
-        CC --> IF[Isolation Forest]:::coreNode
-        CC --> LSTM[LSTM Predictive Model]:::coreNode
+        CC --> IF[Isolation Forest Detection]
+        CC --> LOUVAIN[Louvain Community Analysis]
+        CC --> LSTM[LSTM Predictive Maintenance]
     end
 ```
 
 ---
 
-## 🔄 Cryptographic & Analytical Data Flow
+## Cybersecurity Threat Model
+
+The system is designed to address multiple attack vectors commonly observed in smart-grid environments.
 
 ```mermaid
-sequenceDiagram
-    autonumber
+graph LR
 
-    participant Meter as Smart Meter
-    participant Substation as Substation Network
-    participant Central as Central Monitoring
+A[Meter Spoofing] --> B[Device Authentication]
 
-    Meter->>Substation: AES Encrypted Telemetry
-    Meter->>Substation: Digital Signature + Nonce
+C[Replay Attack] --> D[Nonce + Timestamp Verification]
 
-    Note over Substation: Authentication & Verification
+E[Record Manipulation] --> F[Immutable Ledger Logging]
 
-    Substation->>Substation: PBFT Pre-Prepare
-    Substation->>Substation: PBFT Prepare
-    Substation->>Substation: PBFT Commit
+G[Line Tapping] --> H[Residual Current Analysis]
 
-    Substation->>Substation: Append Ledger Block
+I[Fraudulent Reporting] --> J[Isolation Forest Detection]
 
-    Substation->>Central: Forward Immutable Block Stream
-
-    Central->>Central: Isolation Forest Analysis
-    Central->>Central: LSTM Forecasting
-
-    alt Anomaly Score > Threshold
-        Central-->>Substation: Theft Alert Generated
-    end
+K[Meter Tampering] --> L[Hardware Tamper Alerts]
 ```
 
 ---
 
-## 📂 Repository Structure
+## Hardware Prototype
+
+### Meter Node
+
+* Arduino UNO
+* ESP8266 Communication Module
+* ZMCT103C Current Transformer
+* LCD Interface
+
+Functions:
+
+* Current measurement
+* Telemetry generation
+* Tamper-event reporting
+* Secure communication
+
+### Substation Node
+
+* Arduino Mega
+* ESP32 Gateway
+* Current Monitoring Sensors
+* Residual Current Analysis
+
+Functions:
+
+* Aggregate consumption monitoring
+* Theft detection
+* Ledger generation
+* Central reporting
+
+---
+
+## Cryptographic Security Features
+
+### Device Authentication
+
+Each device is associated with:
+
+* Unique Device ID
+* Timestamp Validation
+* Nonce Verification
+* Digital Signatures
+
+Mitigating:
+
+* Replay attacks
+* Device spoofing
+* Unauthorized network participation
+
+### Immutable Audit Logging
+
+Consumption events are stored as cryptographically linked records to provide:
+
+* Data integrity
+* Tamper evidence
+* Transparent auditing
+
+---
+
+## Machine Learning Pipeline
+
+### Isolation Forest
+
+Used for unsupervised anomaly detection.
+
+Applications:
+
+* Electricity theft detection
+* Suspicious consumption patterns
+* Fraud identification
+
+### LSTM Predictive Maintenance
+
+Research prototype for forecasting:
+
+* Abnormal current behavior
+* Infrastructure degradation
+* Preventive maintenance requirements
+
+---
+
+## Graph-Theoretic Analysis
+
+### Louvain Community Detection
+
+Consumers are represented as graph nodes.
+
+Edges represent similarity between consumption profiles.
+
+Applications:
+
+* Community discovery
+* Local anomaly detection
+* Theft hotspot identification
+
+### Z-Score Analysis
+
+Used to identify households with statistically abnormal consumption behavior within a local community.
+
+---
+
+## Mathematical Foundations
+
+### Graph Representation
+
+[
+G=(V,E)
+]
+
+Where:
+
+* (V) = Households
+* (E) = Consumption Similarity Edges
+
+### Modularity Optimization
+
+[
+Q=\frac{1}{2m}
+\sum_{ij}
+\left(
+A_{ij}-\frac{k_i k_j}{2m}
+\right)
+\delta(c_i,c_j)
+]
+
+### Z-Score
+
+[
+Z=\frac{P_i-\mu}{\sigma}
+]
+
+### Isolation Forest Score
+
+[
+s(x,n)=2^{-\frac{E(h(x))}{c(n)}}
+]
+
+---
+
+## Repository Structure
 
 ```text
 .
-├── hardware_telemetry
-│   ├── meter_ingest.ino
-│   ├── aes_encrypt.h
-│   └── anti_tamper.c
+├── hardware/
+│   ├── meter_node/
+│   └── substation_node/
 │
-├── substation_blockchain
-│   ├── pbft_mock.py
-│   ├── ledger_manager.py
-│   └── louvain_cluster.py
+├── software/
+│   ├── dashboard/
+│   ├── anomaly_detection/
+│   ├── graph_analysis/
+│   └── ledger/
 │
-├── central_ml_models
-│   ├── isolation_forest.py
-│   ├── kmeans_cluster.py
-│   └── lstm_predictive.py
+├── datasets/
+│   └── synthetic_grid_data/
 │
-├── data_simulations
-│   ├── grid_data_generator.py
-│   └── run_mock_pipeline.py
+├── research/
+│   └── research_paper.pdf
 │
-├── research_paper
-│   └── RESEARCH_PAPER_FINAL.pdf
+├── docs/
+│   ├── architecture.md
+│   ├── threat_model.md
+│   └── deployment_notes.md
 │
-├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## 🧮 Mathematical Foundations
+## Future Scope
 
-### Louvain Modularity Optimization
-
-The graph representing household energy consumption is defined as:
-
-$$
-G = (V,E)
-$$
-
-where:
-
-* V = Households
-* E = Similarity Edges
-
-The modularity score is:
-
-$$
-Q=
-\frac{1}{2m}
-\sum_{ij}
-\left(
-A_{ij}
-------
-
-\frac{k_i k_j}{2m}
-\right)
-\delta(c_i,c_j)
-$$
-
-Maximizing Q enables the discovery of communities with similar consumption behavior.
+* Federated Learning for distributed anomaly detection
+* Edge AI inference on embedded devices
+* Secure firmware update mechanisms
+* Smart-contract based auditing
+* Digital Twin integration
+* Utility-scale deployment studies
 
 ---
 
-### Z-Score Analysis
-
-For each household:
-
-$$
-Z=
-\frac{P_i-\mu}{\sigma}
-$$
-
-Where:
-
-* Pi = Individual Consumption
-* μ = Mean Consumption
-* σ = Standard Deviation
-
-Abnormal Z-Scores indicate potential theft.
-
----
-
-### Isolation Forest Anomaly Score
-
-$$
-s(x,n)=2^{-\frac{E(h(x))}{c(n)}}
-$$
-
-Where:
-
-* E(h(x)) = Average Path Length
-* c(n) = Normalization Constant
-
-Anomaly scores approaching 1 indicate suspicious activity.
-
----
-
-## 🏆 Recognition & Validation
-
-### Research Status
-
-✅ Research Paper Completed
-
-✅ Architecture Designed
-
-✅ Mathematical Framework Validated
-
-✅ Simulation Environment Developed
-
-✅ Synthetic Dataset Testing Completed
-
-✅ MVP Validation Achieved
-
-### Core Technologies Evaluated
-
-* Blockchain Ledger Design
-* PBFT Consensus
-* Louvain Algorithm
-* Isolation Forest
-* K-Means Clustering
-* LSTM Neural Networks
-* AES Encryption
-
----
-
-## 📈 MVP Results
-
-Simulation studies indicate:
-
-* Accurate anomaly detection across synthetic theft scenarios
-* Distributed tamper-resistant record management
-* Improved visibility into localized consumption anomalies
-* Scalable deployment model for both rural and urban regions
-
----
-
-## 🗺️ Project Roadmap
-
-### ✅ Phase 1 — Research & Architecture
-
-* Problem Analysis
-* Mathematical Modeling
-* Security Design
-
-### ✅ Phase 2 — Simulation & MVP Validation
-
-* Dataset Generation
-* Isolation Forest Integration
-* Graph Analytics Testing
-
-### 🔄 Phase 3 — Hardware Integration (Current)
-
-* STM8 Firmware Development
-* Sensor Integration
-* RF/LoRaWAN Communication
-
-### ⏳ Phase 4 — Distributed Deployment
-
-* Multi-Node PBFT Network
-* Real-Time Monitoring Dashboard
-* Field Testing
-
----
-
-## 🚀 Future Scope
-
-* Smart City Scale Deployment
-* Federated Learning Integration
-* Edge AI Inference
-* Smart Contract Automation
-* Utility Company Integration
-* National Grid Security Applications
-
----
-
-## 📜 License
-
-This repository is intended for research, innovation, academic evaluation, and smart-grid security development.
-
----
-
-### Author
+## About the Author
 
 **Sameer**
 
-Research Focus:
+Research Interests:
 
-* Blockchain Systems
+* Cybersecurity
 * Smart Grid Security
 * Machine Learning
 * Graph Theory
-* Embedded Systems
+* Blockchain Systems
+* Embedded & IoT Security
+
+### Achievements
+
+🏆 Samsung Solve for Tomorrow India 2025 Grand Finale (Top 20)
+
+🏆 IRIS National Fair Selection
+
+---
+
+## License
+
+This repository is intended for academic research, innovation, cybersecurity education, and smart-grid security development.
