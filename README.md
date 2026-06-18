@@ -6,41 +6,35 @@
 
 🏆 **Selected for IRIS (Initiative for Research and Innovation in STEM)**
 
-📄 **Independent Research Project integrating Cybersecurity, Blockchain, Graph Theory, Machine Learning, and IoT Systems for Smart Grid Protection**
+📄 **Independent Research Project integrating Cybersecurity, Blockchain, Graph Theory, Machine Learning and IoT Systems for Smart Grid Protection**
+
+---
+
+## Quick Links
+
+* 📄 Research Paper
+* 📹 Prototype Demonstration Video
+* 🏆 Samsung Solve for Tomorrow Documentation
+* 🏆 IRIS Documentation
+* 📊 System Architecture
+* 🔬 Experimental Research Notes
 
 ---
 
 ## Overview
 
-CryptEthEra is a cybersecurity-oriented smart grid monitoring framework designed to detect electricity theft, meter tampering, fraudulent reporting, and infrastructure anomalies in power distribution networks.
+CryptEthEra is a cybersecurity-oriented smart-grid monitoring framework designed to detect electricity theft, meter tampering, fraudulent reporting, and infrastructure anomalies in electrical distribution networks.
 
 The framework combines:
 
 * Blockchain-based immutable logging
-* Machine Learning anomaly detection
-* Graph-theoretic network analysis
-* IoT-based telemetry collection
-* Cryptographic authentication mechanisms
+* Graph-theoretic anomaly detection
+* Machine Learning analytics
+* IoT telemetry collection
+* Cryptographic authentication
+* Experimental physical-layer monitoring
 
-to create a transparent, tamper-resistant, and scalable monitoring architecture for modern electrical grids.
-
----
-
-## Problem Statement
-
-Electricity theft remains one of the largest contributors to power distribution losses worldwide.
-
-Common forms of energy theft include:
-
-* Direct line tapping
-* Meter tampering
-* Consumption record manipulation
-* Fraudulent reporting
-* Insider corruption within distribution systems
-
-Traditional monitoring architectures are largely centralized and vulnerable to delayed detection, manipulation, and poor traceability.
-
-CryptEthEra proposes a decentralized monitoring framework capable of providing secure data integrity, transparent auditing, and real-time anomaly detection.
+to create a transparent, tamper-resistant, and scalable monitoring architecture.
 
 ---
 
@@ -52,29 +46,103 @@ CryptEthEra proposes a decentralized monitoring framework capable of providing s
 
 🏆 Selected for IRIS National Fair
 
+### Documentation & Media
+
+```text
+recognition/
+├── samsung_sft/
+│   ├── grand_finale_selection.pdf
+│   ├── pitch_deck.pdf
+│   ├── prototype_demo.mp4
+│   └── event_photos/
+│
+├── iris/
+│   ├── selection_document.pdf
+│   └── participation_material/
+```
+
 ### Research & Prototype Validation
 
 ✅ Research Paper Completed
 
-✅ System Architecture Designed
-
 ✅ Mathematical Framework Developed
-
-✅ Simulation Environment Implemented
-
-✅ Synthetic Dataset Validation Completed
 
 ✅ Hardware MVP Demonstrated
 
-✅ Dashboard-Based Monitoring Demonstrated
+✅ Dashboard Demonstrated
 
-🔄 Real-World Field Validation Ongoing
+✅ Synthetic Dataset Validation
+
+✅ Cybersecurity Threat Modeling
+
+🔄 Ongoing Experimental Development
+
+---
+
+## Research Evolution
+
+The project evolved through multiple engineering iterations.
+
+| Version | Focus                         | Objective                                                                      |
+| ------- | ----------------------------- | ------------------------------------------------------------------------------ |
+| V1      | Sensor Calibration & Accuracy | Improve CT sensor stability, RMS measurement and calibration                   |
+| V2      | Residual Current Detection    | Detect energy imbalance between feeders and consumers                          |
+| V3      | Signal Injection Research     | Explore physical-layer theft detection through frequency and response analysis |
+| V4      | Blockchain + AI Framework     | Secure and scale anomaly detection across the grid                             |
+
+```mermaid
+flowchart LR
+
+A[V1<br/>Sensor Calibration & Accuracy]
+
+--> B[V2<br/>Residual Current Detection]
+
+--> C[V3<br/>Signal Injection Research]
+
+--> D[V4<br/>Blockchain + AI Framework]
+```
+
+---
+
+## Experimental Research
+
+Beyond conventional consumption monitoring, ongoing research investigates active electrical signature injection for theft localization.
+
+### Signal Injection Research
+
+Research objective:
+
+* Inject controlled electrical signatures into power lines
+* Observe frequency and impedance response
+* Detect unauthorized loads and illegal tapping
+* Improve localization of theft events
+
+Potential techniques investigated:
+
+* Frequency response analysis
+* Harmonic monitoring
+* Impedance variation detection
+* Active signal injection
+* Time-domain response analysis
+
+### Experimental Documentation
+
+```text
+research_experiments/
+├── current_sensor_v1/
+├── current_sensor_v2/
+├── residual_current_detection/
+├── signal_injection_v1/
+├── signal_injection_v2/
+├── frequency_response_tests/
+└── experimental_notes/
+```
+
+Detailed schematics, circuit revisions, code references and experimental notes are available in the project archive.
 
 ---
 
 ## System Architecture
-
-The framework operates across three hierarchical layers to ensure scalability, security, and computational efficiency.
 
 ```mermaid
 graph TD
@@ -84,27 +152,24 @@ graph TD
     classDef coreNode fill:#bfb,stroke:#333,stroke-width:2px;
 
     subgraph L1 [Level 1: Smart Meter Layer]
-        M1[Meter Node 1]:::edgeNode -->|Authenticated Telemetry| S1
-        M2[Meter Node 2]:::edgeNode -->|Authenticated Telemetry| S1
-        M3[Meter Node 3]:::edgeNode -->|Authenticated Telemetry| S2
+        M1[Meter Node]:::edgeNode --> S1
+        M2[Meter Node]:::edgeNode --> S1
     end
 
-    subgraph L2 [Level 2: Substation Monitoring Layer]
+    subgraph L2 [Level 2: Substation Layer]
         S1[Substation Gateway]:::ledgerNode
         S2[Substation Gateway]:::ledgerNode
 
         S1 <-->|Ledger Synchronization| S2
-
-        S1 -->|Community Analysis| S1
     end
 
-    subgraph L3 [Level 3: Central Monitoring Layer]
+    subgraph L3 [Level 3: Central Monitoring]
         S1 --> CC[Central Monitoring Engine]:::coreNode
         S2 --> CC
 
-        CC --> IF[Isolation Forest Detection]
-        CC --> LOUVAIN[Louvain Community Analysis]
-        CC --> LSTM[LSTM Predictive Maintenance]
+        CC --> IF[Isolation Forest]
+        CC --> LC[Louvain Community Analysis]
+        CC --> PM[Predictive Maintenance]
     end
 ```
 
@@ -112,14 +177,12 @@ graph TD
 
 ## Cybersecurity Threat Model
 
-The system is designed to address multiple attack vectors commonly observed in smart-grid environments.
-
 ```mermaid
 graph LR
 
 A[Meter Spoofing] --> B[Device Authentication]
 
-C[Replay Attack] --> D[Nonce + Timestamp Verification]
+C[Replay Attack] --> D[Nonce + Timestamp Validation]
 
 E[Record Manipulation] --> F[Immutable Ledger Logging]
 
@@ -137,137 +200,50 @@ K[Meter Tampering] --> L[Hardware Tamper Alerts]
 ### Meter Node
 
 * Arduino UNO
-* ESP8266 Communication Module
-* ZMCT103C Current Transformer
+* ESP8266
+* ZMCT103C Current Sensor
 * LCD Interface
-
-Functions:
-
-* Current measurement
-* Telemetry generation
-* Tamper-event reporting
-* Secure communication
 
 ### Substation Node
 
 * Arduino Mega
 * ESP32 Gateway
 * Current Monitoring Sensors
-* Residual Current Analysis
 
-Functions:
+### Monitoring System
 
-* Aggregate consumption monitoring
-* Theft detection
-* Ledger generation
-* Central reporting
-
----
-
-## Cryptographic Security Features
-
-### Device Authentication
-
-Each device is associated with:
-
-* Unique Device ID
-* Timestamp Validation
-* Nonce Verification
-* Digital Signatures
-
-Mitigating:
-
-* Replay attacks
-* Device spoofing
-* Unauthorized network participation
-
-### Immutable Audit Logging
-
-Consumption events are stored as cryptographically linked records to provide:
-
-* Data integrity
-* Tamper evidence
-* Transparent auditing
+* Python Dashboard
+* Anomaly Detection Engine
+* Ledger Visualization
+* Event Logging
 
 ---
 
-## Machine Learning Pipeline
+## Machine Learning & Analytics
 
 ### Isolation Forest
 
-Used for unsupervised anomaly detection.
-
 Applications:
 
-* Electricity theft detection
-* Suspicious consumption patterns
-* Fraud identification
-
-### LSTM Predictive Maintenance
-
-Research prototype for forecasting:
-
-* Abnormal current behavior
-* Infrastructure degradation
-* Preventive maintenance requirements
-
----
-
-## Graph-Theoretic Analysis
+* Theft Detection
+* Fraud Identification
+* Consumption Anomaly Detection
 
 ### Louvain Community Detection
 
-Consumers are represented as graph nodes.
-
-Edges represent similarity between consumption profiles.
-
 Applications:
 
-* Community discovery
-* Local anomaly detection
-* Theft hotspot identification
+* Localized anomaly identification
+* Consumption clustering
+* Theft hotspot detection
 
-### Z-Score Analysis
+### Predictive Maintenance
 
-Used to identify households with statistically abnormal consumption behavior within a local community.
+Research prototype for:
 
----
-
-## Mathematical Foundations
-
-### Graph Representation
-
-[
-G=(V,E)
-]
-
-Where:
-
-* (V) = Households
-* (E) = Consumption Similarity Edges
-
-### Modularity Optimization
-
-[
-Q=\frac{1}{2m}
-\sum_{ij}
-\left(
-A_{ij}-\frac{k_i k_j}{2m}
-\right)
-\delta(c_i,c_j)
-]
-
-### Z-Score
-
-[
-Z=\frac{P_i-\mu}{\sigma}
-]
-
-### Isolation Forest Score
-
-[
-s(x,n)=2^{-\frac{E(h(x))}{c(n)}}
-]
+* Equipment degradation prediction
+* Abnormal current behavior analysis
+* Preventive maintenance planning
 
 ---
 
@@ -276,26 +252,13 @@ s(x,n)=2^{-\frac{E(h(x))}{c(n)}}
 ```text
 .
 ├── hardware/
-│   ├── meter_node/
-│   └── substation_node/
-│
 ├── software/
-│   ├── dashboard/
-│   ├── anomaly_detection/
-│   ├── graph_analysis/
-│   └── ledger/
-│
 ├── datasets/
-│   └── synthetic_grid_data/
-│
+├── dashboard/
 ├── research/
-│   └── research_paper.pdf
-│
+├── research_experiments/
 ├── docs/
-│   ├── architecture.md
-│   ├── threat_model.md
-│   └── deployment_notes.md
-│
+├── recognition/
 └── README.md
 ```
 
@@ -303,12 +266,12 @@ s(x,n)=2^{-\frac{E(h(x))}{c(n)}}
 
 ## Future Scope
 
-* Federated Learning for distributed anomaly detection
-* Edge AI inference on embedded devices
-* Secure firmware update mechanisms
-* Smart-contract based auditing
-* Digital Twin integration
-* Utility-scale deployment studies
+* Federated Learning
+* Edge AI Inference
+* Secure Firmware Updates
+* Smart Contract Automation
+* Digital Twin Integration
+* Utility-Scale Deployment
 
 ---
 
@@ -323,16 +286,17 @@ Research Interests:
 * Machine Learning
 * Graph Theory
 * Blockchain Systems
-* Embedded & IoT Security
+* Embedded Systems
+* IoT Security
 
 ### Achievements
 
 🏆 Samsung Solve for Tomorrow India 2025 Grand Finale (Top 20)
 
-🏆 IRIS National Fair Selection
+🏆 IRIS Selection
 
 ---
 
 ## License
 
-This repository is intended for academic research, innovation, cybersecurity education, and smart-grid security development.
+This repository is intended for academic research, innovation, cybersecurity education and smart-grid security development.
