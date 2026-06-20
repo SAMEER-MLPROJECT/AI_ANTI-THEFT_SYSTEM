@@ -83,6 +83,5 @@ void loop() {
     }
   }
   
-  // Your other non-blocking code can go here. 
-  // Ensure nothing blocks the loop for longer than SAMPLE_INTERVAL_US (1ms)!
+  
 }
