@@ -2,9 +2,9 @@
 
 ## The Problem
 
-One of the biggest challenges in this project was accurately measuring a very small AC current (~60mA) using a current sensor designed for currents up to 5A.
+One of the biggest challenges in this project was accurately measuring a very small AC current (~60mA) using a current sensor designed for currents up to 5A. 
 
-At that scale, the actual signal becomes extremely small compared to the surrounding electrical noise. While the sensor could technically detect the current, obtaining stable and reliable readings was difficult because the measurement was heavily affected by mains interference, power supply ripple, ADC drift, and other environmental noise.
+At that scale, the actual signal becomes extremely small compared to the surrounding electrical noise. While the sensor could technically detect the current, obtaining stable and reliable readings was difficult because the measurement was heavily affected by mains interference, power supply ripple, ADC drift, and other environmental noise , Like in my case it detected the em radiation from the laptop charger
 
 ---
 
