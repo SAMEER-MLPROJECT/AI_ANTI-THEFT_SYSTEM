@@ -1,4 +1,5 @@
 # CryptEthEra
+# NOTE : ALL THE FILES EARLIER THAN 2 YEARS ARE OUTDATED PREMATURE SKETCHES
 
 ### Blockchain-Assisted Smart Grid Security & Energy Theft Detection Framework
 
