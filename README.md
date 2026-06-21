@@ -11,6 +11,10 @@
 
 ---
 
+## HIGHLIGHTS
+### Samsung Solve for Tomorrow Grand Finale 
+![SAMSUNG EVENT](recognition/Samsung_sft/photo_2026-06-21_12-11-33.jpg)
+
 ## Quick Links
 
 * 📄 Research Paper
