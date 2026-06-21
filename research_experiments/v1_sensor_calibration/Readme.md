@@ -1,7 +1,7 @@
 
 ```mermaid
 graph TD
-    %% High-Voltage Side
+    
     subgraph AC_Mains [AC Power Line]
         Wire[AC Load Wire]
     end
