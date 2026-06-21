@@ -18,6 +18,9 @@
 ### MVP ( DEMONSTRATED PROTYPE )
 ![FINAL PROTOTYPE](media/photo_2025-09-08_17-29-50.jpg)
 
+### CENTRAL MONITORING DASHBOARD
+![DB](media/🔋 CRYPTETHERA - SFT 2025 6_21_2026 1_34_25 PM.png)
+
 ## Quick Links
 
 * 📄 Research Paper
