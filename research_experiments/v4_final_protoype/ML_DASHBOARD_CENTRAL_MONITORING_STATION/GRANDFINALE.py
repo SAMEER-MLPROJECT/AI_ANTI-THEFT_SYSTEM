@@ -97,9 +97,9 @@ class SmartEnergyTheftDetector:
         self.serial_sub = None   
         self.serial_meter = None 
 
-        # Wi-Fi (ESP32 AP TCP) live path
-        self.net_sock = None          # TCP socket to ESP32 (192.168.4.1:8080)
-        self.live_running_net = False # Wi-Fi live loop flag
+        
+        self.net_sock = None          
+        self.live_running_net = False 
 
 
         
@@ -109,7 +109,7 @@ class SmartEnergyTheftDetector:
         self.residuals = deque(maxlen=1000)
         self.live_currents = deque(maxlen=600)  
 
-        # Detection metrics
+        
         self.detection_accuracy = {"tp": 0, "fp": 0, "tn": 0, "fn": 0}
         self.live_theft_detected = False
 
@@ -144,7 +144,7 @@ class SmartEnergyTheftDetector:
     
         self.create_startup_ui()
 
-        # Threads
+        
         self.sim_thread = None
         self.live_thread = None
 
@@ -376,7 +376,7 @@ class SmartEnergyTheftDetector:
      except Exception:
         ports = []
 
-    # close any previous handles
+    
      for conn in (getattr(self, 'serial_sub', None), getattr(self, 'serial_meter', None), getattr(self, 'serial_conn', None)):
         try:
             if conn: conn.close()
@@ -422,7 +422,7 @@ class SmartEnergyTheftDetector:
 
 
     def start_live_mode_wifi(self):
-        """Prepare Live mode over Wi-Fi TCP (ESP32 AP 192.168.4.1:8080)."""
+    
         self.current_mode = "LIVE_WIFI"
         self.create_live_interface()
         self.meters = {}
@@ -461,7 +461,7 @@ class SmartEnergyTheftDetector:
         self.update_live_controls_wifi()
 
     def try_connect_wifi(self, host="192.168.4.1", port=8080):
-        """Open TCP socket to ESP32 gateway (AP)."""
+        
         
         try:
             if self.net_sock:
@@ -486,7 +486,7 @@ class SmartEnergyTheftDetector:
             self.net_sock = None
 
     def live_loop_wifi(self):
-        """Read CSV lines from ESP32 TCP socket and feed UI/ledger."""
+        
         sock = self.net_sock
         if not sock:
             return
@@ -495,7 +495,7 @@ class SmartEnergyTheftDetector:
             while self.current_mode == "LIVE_WIFI" and self.live_running_net:
                 line = f.readline()
                 if not line:
-                    # connection dropped → try reconnect
+                    
                     try:
                         f.close()
                     except: pass
@@ -512,7 +512,7 @@ class SmartEnergyTheftDetector:
                     continue
 
                 line = line.strip()
-                # Expect: SUBSTATION,ts_ms,sub_irms,residual,meter_irms
+                
                 self.process_gateway_csv(line)
                 try:
                     self.root.after(0, self.update_live_ui)
@@ -532,7 +532,6 @@ class SmartEnergyTheftDetector:
             self.root.after(0, self.update_live_controls_wifi)
 
     def process_gateway_csv(self, line):
-        """Parse ESP32 CSV and update charts + ledger."""
         parts = [p.strip() for p in line.split(',')]
         if len(parts) != 5 or parts[0] != "SUBSTATION":
             return
@@ -544,7 +543,7 @@ class SmartEnergyTheftDetector:
         except Exception:
             return
 
-        # VERSION 1 PLOT
+        
         self.residuals.append(residual_irms * 230.0)  
         self.live_currents.append(residual_irms)      
 
@@ -606,10 +605,10 @@ class SmartEnergyTheftDetector:
                 base = random.uniform(60, 500)
                 daily = 0.7 + 0.5 * math.sin(2 * math.pi * (hour - 6) / 24)
                 noise = random.gauss(0, 18)
-                pm = max(10.0, base * daily + noise)  # meter-reported (no theft)
-                resid = random.uniform(0, 20)  # small technical loss
+                pm = max(10.0, base * daily + noise)  
+                resid = random.uniform(0, 20)  
                 normal.append([pm + resid, hour, resid])
-            for _ in range(240):  # rarer thefts
+            for _ in range(240):  
                 hour = random.randint(0, 23)
                 base = random.uniform(60, 500)
                 daily = 0.7 + 0.5 * math.sin(2 * math.pi * (hour - 6) / 24)
@@ -630,7 +629,7 @@ class SmartEnergyTheftDetector:
         else:
             self.model_trained = False
 
-        # Reset metrics/buffers
+        
         self.detection_accuracy = {"tp": 0, "fp": 0, "tn": 0, "fn": 0}
         self.residuals.clear()
 
@@ -696,7 +695,7 @@ class SmartEnergyTheftDetector:
         residual = sub_total - meter_sum_reported  # what we expect to catch
         self.residuals.append(residual)
 
-        # ML detect or fallback
+        
         detected = False
         conf = 0.0
         if HAS_SKLEARN and self.model_trained:
@@ -716,7 +715,7 @@ class SmartEnergyTheftDetector:
             conf = min(0.98, residual / (sub_total + 1e-6)) if sub_total > 0 else 0.0
 
         self.live_theft_detected = detected
-        # Update metrics
+        
         if detected and theft_any:
             self.detection_accuracy["tp"] += 1
         elif detected and not theft_any:
@@ -726,7 +725,7 @@ class SmartEnergyTheftDetector:
         else:
             self.detection_accuracy["tn"] += 1
 
-        # Log a single system summary row per tick (no per-meter spam)
+        
         self.insert_simulation_record("SYS", "NETWORK", "SYSKEY",
                                       p_meter=meter_sum_reported,
                                       p_sub=sub_total,
@@ -957,7 +956,7 @@ class SmartEnergyTheftDetector:
         w = c.winfo_width() or 800
         h = c.winfo_height() or 450
 
-        # PC node
+        
         pc_x, pc_y = w // 2, 60
         pc_online = self.current_mode in ("SIMULATION", "LIVE")
         pc_color = "#00ff88" if pc_online else "#666666"
@@ -965,7 +964,7 @@ class SmartEnergyTheftDetector:
         c.create_text(pc_x, pc_y, text="CENTRAL PC\nMonitor", fill="black", font=("Arial", 10, "bold"))
         c.create_text(pc_x, pc_y + 48, text=self.grid_topology.central_station["address"], fill="#aaa", font=("Arial", 8))
 
-        # Substation node
+
         sub_x, sub_y = w // 2, h // 2 - 40
         live_ok = (self.current_mode == "LIVE" and self.serial_conn is not None)
         sim_ok = (self.current_mode == "SIMULATION" and self.simulation_running)
@@ -1009,7 +1008,7 @@ class SmartEnergyTheftDetector:
             c.create_text(mx, my + 18, text=addr, fill="#ddd", font=("Arial", 7))
             c.create_line(sub_x, sub_y + 28, mx, my - 10, fill=("#ff3b30" if theft else line_color), width=2)
 
-        # If live mode but no serial/data => show OFF overlay
+        
         if self.current_mode == "LIVE" and not self.serial_conn:
             c.create_text(w // 2, h // 2 + 120, text="GRID OFF — NO DATA", fill="red", font=("Arial", 18, "bold"))
 
@@ -1149,7 +1148,7 @@ class SmartEnergyTheftDetector:
         except Exception:
             pass
 
-        # Live status text when relevant
+        
         if self.current_mode == "LIVE":
             self.update_live_controls()
 
