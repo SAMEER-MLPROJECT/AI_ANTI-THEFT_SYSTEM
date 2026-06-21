@@ -51,7 +51,7 @@ without wasting resources analyzing frequencies that are irrelevant to the measu
 
 ---
 
-## Why It CHOSE GOERTZEL
+## Advantage of GOERTZEL Here
 
 * **Excellent Noise Rejection** – Frequencies other than 50Hz contribute very little to the final result.
 * **Minimal Memory Usage** – No large sample buffers are required.
@@ -63,4 +63,4 @@ without wasting resources analyzing frequencies that are irrelevant to the measu
 
 
 
-For this application, the Goertzel Algorithm turned out to be the perfect balance between efficiency, simplicity, and accuracy.
+
