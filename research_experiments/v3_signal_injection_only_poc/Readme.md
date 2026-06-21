@@ -11,7 +11,7 @@ This repository provides the edge-node (Household energy Meter) architecture tha
 
 
 **This attempt purposes Active Time Domain Reflectometry (TDR) to the Smart Meter.**
-1. **Signal Injection:** The ESP32 continuously injects a low-voltage, high-frequency (120kHz) signature signal onto the high-voltage AC live wire via a capacitive coupling circuit.
+1. **Signal Injection:** The Microntroller ( ESP32 IN MY CASE ) continuously injects a low-voltage, high-frequency (120kHz) signature signal onto the high-voltage AC live wire via a capacitive coupling circuit.
 2. **Impedance Monitoring:** A reflected envelope detector reads the returning signal. 
 3. **Physical Tamper Detection:** When an unauthorized connection is added to the power line via hooking, it changes the wire's geometry and impedance. This causes an immediate, measurable attenuation (drop) in the injected (120kHz signal), instantly alerting the ML pipeline of a physical tap.
 
@@ -24,7 +24,7 @@ This repository provides the edge-node (Household energy Meter) architecture tha
 * **Op-Amp & Diode Envelope Detector** (For filtering)
 
 ### Schematic
-*(Note: Mermaid diagrams render natively in GitHub)*
+
 
 ```mermaid
 graph LR
