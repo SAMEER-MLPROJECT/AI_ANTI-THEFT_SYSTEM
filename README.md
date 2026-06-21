@@ -58,7 +58,7 @@ to create a transparent, tamper-resistant, and scalable monitoring architecture.
 🏆 Selected for IRIS National Fair
 
 ### Documentation & Media
-[SAMSUNG_LIST](https://images.samsung.com/is/content/samsung/assets/in/solvefortomorrow/2025/SFT_20_teams.pdf)
+[GRAND_FINALE_LIST](https://images.samsung.com/is/content/samsung/assets/in/solvefortomorrow/2025/SFT_20_teams.pdf)
 
 ```text
 recognition/
