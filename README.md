@@ -63,10 +63,10 @@ to create a transparent, tamper-resistant, and scalable monitoring architecture.
 ```text
 recognition/
 ├── samsung_sft/
-│   ├── grand_finale_selection.pdf
+│   ├── grand_finale_pitch.ppt
 │   ├── pitch_deck.pdf
-│   ├── prototype_demo.mp4
-│   └── event_photos/
+│   ├── prototype_demo
+│   └── event_photos
 │
 ├── iris/
 │   ├── selection_document.pdf
@@ -141,12 +141,10 @@ Potential techniques investigated:
 
 ```text
 research_experiments/
-├── current_sensor_v1/
-├── current_sensor_v2/
-├── residual_current_detection/
-├── signal_injection_v1/
-├── signal_injection_v2/
-├── frequency_response_tests/
+├── v1_sensor_callibration/
+├── v2_sensor_design/
+├── v3_signal_injection_only_poc/
+├── v4_final_prototype/
 └── experimental_notes/
 ```
 
