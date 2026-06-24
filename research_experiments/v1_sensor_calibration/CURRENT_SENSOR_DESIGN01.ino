@@ -14,12 +14,12 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 const unsigned long OFFSET_SAMPLES = 300;
 const unsigned long RMS_WINDOW_MS  = 1000;
 
-float CALIBRATION_FACTOR = 10.0;  // <-- adjust after calibration
+float CALIBRATION_FACTOR = 5.51;  // 13th day of RE-callibration 18 AUG
 const float NOISE_FLOOR_MV = 2.0;
 const float NOISE_CURRENT_THRESHOLD = 0.03; 
 
 
-// --- smoothing helper ---
+
 float median3(float a, float b, float c){
   if ((a <= b && b <= c) || (c <= b && b <= a)) return b;
   if ((b <= a && a <= c) || (c <= a && a <= b)) return a;
