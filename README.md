@@ -1,5 +1,6 @@
-# CryptEthEra
+# PREVIOUS RESEARCH ''CryptEthEra''
 ## NOTE : ALL THE FILES COMMITED EARLIER THAN 1 YEAR ARE OUTDATED PREMATURE SKETCHES
+## SIH SUBMISSION CALLED Re-NEWGRID BEGINS AFTER ONGOING RESEARCH EVALUATION
 
 ### Blockchain-Assisted Smart Grid Security & Energy Theft Detection Framework
 
@@ -87,7 +88,10 @@ recognition/
 
 ✅ Cybersecurity Threat Modeling
 
-🔄 Ongoing Experimental Development
+🔄 Ongoing Experimental Development 
+## NEW IDEA FOR SIH 
+## UPDATES : CAPACITIVE COUPLING BASED ELECTRICAL SIGNATURE INJECTION
+## ENHANCED RNN APPLICATION
 
 ---
 
