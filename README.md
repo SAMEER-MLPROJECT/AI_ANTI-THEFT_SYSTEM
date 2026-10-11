@@ -4,7 +4,7 @@
 
 ### Blockchain-Assisted Smart Grid Security & Energy Theft Detection Framework
 
-🏆 **Samsung Solve for Tomorrow India 2025 — Grand Finale (Top 20 Teams Nationwide)**
+🏆 **Samsung Solve for Tomorrow India 2025 - Grand Finale (Top 20 Teams Nationwide)**
 
 🏆 **Selected for IRIS (Initiative for Research and Innovation in STEM)**
 
