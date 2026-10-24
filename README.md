@@ -54,7 +54,7 @@ to create a transparent, tamper-resistant, and scalable monitoring architecture.
 
 ### National Recognition
 
-🏆 Samsung Solve for Tomorrow India 2025 — Grand Finale (Top 20)
+🏆 Samsung Solve for Tomorrow India 2025 - Grand Finale (Top 20)
 
 🏆 Selected for IRIS National Fair
 
