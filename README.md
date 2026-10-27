@@ -316,7 +316,7 @@ This repository is intended for academic research, innovation, cybersecurity edu
 ## Original Work, Authorship and Intellectual Property
 
 **Original Creator: Sameer Saawan**  
-**Repository: CryptEthEra : AI and IoT-Enabled Predictive Maintainence and Energy Anti-Theft Detection System**  
+**Repository: CryptEthEra **  
 **Copyright: © 2026 Sameer Saawan. All rights reserved.**
 
 Sameer Saawan asserts authorship and ownership of the original project materials independently created by him, including source code, embedded firmware, hardware integration designs, system architecture, electrical-signature analysis, machine-learning implementations, data-processing pipelines, dashboard software, technical documentation, diagrams, and original research contributions, to the extent owned by him.
