@@ -313,3 +313,18 @@ Research Interests:
 ## License
 
 This repository is intended for academic research, innovation, cybersecurity education and smart-grid security development.
+## Original Work, Authorship and Intellectual Property
+
+**Original Creator: Sameer Saawan**  
+**Project: CryptEthEra — AI- and IoT-Enabled Smart Energy Theft Detection System**  
+**Copyright: © 2026 Sameer Saawan. All rights reserved.**
+
+Sameer Saawan asserts authorship and ownership of the original project materials independently created by him, including source code, embedded firmware, hardware integration designs, system architecture, electrical-signature analysis, machine-learning implementations, data-processing pipelines, dashboard software, technical documentation, diagrams, and original research contributions, to the extent owned by him.
+
+Unless expressly authorized by the relevant rights holder, no permission is granted to reproduce, redistribute, modify, publish, or commercially exploit the original copyrighted materials beyond rights permitted by applicable law.
+
+Third-party components, collaborative contributions, and materials subject to institutional, competition, sponsorship, or other agreements remain governed by their respective licenses, ownership rights, and contractual terms.
+
+Public availability of this repository does not constitute a general license to reuse its original copyrighted materials.
+
+See the `LICENSE` file for the applicable rights notice.
